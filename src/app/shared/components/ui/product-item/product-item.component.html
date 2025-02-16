@@ -1,15 +1,18 @@
 <div
   class="product border border-gray hover:border-main p-4 rounded-xl hover:shadow-xl transition-all mb-4 group hover:translate-y-[-1rem]"
 >
-  <img [src]="product.imageCover" class="w-full" alt="" />
-  <span class="text-main block my-3">{{ product.category.name }}</span>
-  <h2 class="mb-4">{{ product.title.split(" ").splice(0, 2).join(" ") }}</h2>
-  <div class="flex justify-between mb-3">
-    <p>{{ product.price }}</p>
-    <p>
-      <i class="fa fa-star text-[#ffc908]"></i> {{ product.ratingsAverage }}
-    </p>
-  </div>
+  <a [routerLink]="['/productDetails', product._id]">
+    <img [src]="product.imageCover" class="w-full" alt="" />
+    <span class="text-main block my-3">{{ product.category.name }}</span>
+    <h2 class="mb-4">{{ product.title.split(" ").splice(0, 2).join(" ") }}</h2>
+    <div class="flex justify-between mb-3">
+      <p>{{ product.price }}</p>
+      <p>
+        <i class="fa fa-star text-[#ffc908]"></i> {{ product.ratingsAverage }}
+      </p>
+    </div>
+  </a>
+
   <button
     class="text-white p-2 rounded-md w-[90%] mx-auto block mt-3 bg-main opacity-0 transition-all duration-500 group-hover:opacity-100 translate-y-[100%] group-hover:translate-y-0 overflow-hidden"
   >

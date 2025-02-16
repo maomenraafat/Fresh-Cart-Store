@@ -12,6 +12,7 @@ import {
 } from '@angular/platform-browser';
 import { provideHttpClient, withFetch } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { API_BASE_URL } from './token/api-token';
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -20,5 +21,10 @@ export const appConfig: ApplicationConfig = {
     provideClientHydration(withEventReplay()),
     provideHttpClient(withFetch()),
     importProvidersFrom([BrowserAnimationsModule]),
+
+    {
+      provide: API_BASE_URL,
+      useValue: 'https://ecommerce.routemisr.com/api/v1',
+    },
   ],
 };

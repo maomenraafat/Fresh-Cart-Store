@@ -1,5 +1,7 @@
 import { Routes } from '@angular/router';
 import { AuthLayoutComponent } from './core/layout/auth-layout/auth-layout.component';
+import { authGuard } from './core/guards/auth/auth.guard';
+import { loggedUserGuard } from './core/guards/auth/logged-user.guard';
 
 export const routes: Routes = [
   {
@@ -8,6 +10,7 @@ export const routes: Routes = [
     children: [
       {
         path: '',
+        canActivate: [loggedUserGuard],
         loadComponent: () =>
           import('./core/pages/auth/register/register.component').then(
             (c) => c.RegisterComponent
@@ -15,6 +18,7 @@ export const routes: Routes = [
       },
       {
         path: 'login',
+        canActivate: [loggedUserGuard],
         loadComponent: () =>
           import('./core/pages/auth/login/login.component').then(
             (c) => c.LoginComponent
@@ -22,6 +26,7 @@ export const routes: Routes = [
       },
       {
         path: 'forget-password',
+        canActivate: [loggedUserGuard],
         loadComponent: () =>
           import(
             './core/pages/auth/forget-password/forget-password.component'
@@ -29,15 +34,16 @@ export const routes: Routes = [
       },
     ],
   },
-  {
-    path: '',
-    loadComponent: () =>
-      import('./core/pages/auth/login/login.component').then(
-        (c) => c.LoginComponent
-      ),
-  },
+  // {
+  //   path: '',
+  //   loadComponent: () =>
+  //     import('./core/pages/auth/login/login.component').then(
+  //       (c) => c.LoginComponent
+  //     ),
+  // },
   {
     path: 'home',
+    canActivate: [authGuard],
     loadComponent: () =>
       import('./features/pages/home/home.component').then(
         (c) => c.HomeComponent
@@ -45,6 +51,7 @@ export const routes: Routes = [
   },
   {
     path: 'categories',
+    canActivate: [authGuard],
     loadComponent: () =>
       import('./features/pages//categories/categories.component').then(
         (c) => c.CategoriesComponent
@@ -52,6 +59,7 @@ export const routes: Routes = [
   },
   {
     path: 'brands',
+    canActivate: [authGuard],
     loadComponent: () =>
       import('./features/pages/brands/brands.component').then(
         (c) => c.BrandsComponent
@@ -59,13 +67,15 @@ export const routes: Routes = [
   },
   {
     path: 'products',
+    canActivate: [authGuard],
     loadComponent: () =>
       import('./features/pages/products/products.component').then(
         (c) => c.ProductsComponent
       ),
   },
   {
-    path: 'products-details',
+    path: 'productDetails/:id',
+    canActivate: [authGuard],
     loadComponent: () =>
       import(
         './features/pages/products-details/products-details.component'
@@ -73,6 +83,7 @@ export const routes: Routes = [
   },
   {
     path: 'cart',
+    canActivate: [authGuard],
     loadComponent: () =>
       import('./features/pages/cart/cart.component').then(
         (c) => c.CartComponent
