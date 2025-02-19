@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { Product } from '../../../interfaces/product';
 import { RouterLink } from '@angular/router';
 
@@ -10,5 +10,10 @@ import { RouterLink } from '@angular/router';
 })
 export class ProductItemComponent {
   @Input() product!: Product;
+  @Output() fireAddToCart: EventEmitter<string> = new EventEmitter();
   // product = Input<Product>().required;
+
+  handleAddToCart(id: string) {
+    this.fireAddToCart.emit(id);
+  }
 }

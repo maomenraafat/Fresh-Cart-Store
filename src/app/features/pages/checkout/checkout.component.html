@@ -1,1 +1,76 @@
-<p>checkout works!</p>
+<form [formGroup]="checkoutForm">
+  <div class="relative z-0 w-full mb-5 group">
+    @let detailsControl = checkoutForm.get("details");
+
+    <app-custom-input formControlName="details" [type]="'text'" placeholder=" ">
+      <label
+        for="floating_email"
+        class="label label-style peer-focus:font-medium peer-focus:start-0 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto peer-focus:text-main peer-focus:dark:text-main peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6"
+        >details :</label
+      >
+    </app-custom-input>
+    <!-- <input
+      type="email"
+      formControlName="email"
+      name="floating_email"
+      id="floating_email"
+      class="input-style peer"
+      placeholder=" "
+      required
+    /> -->
+
+    <app-error-message [inputControl]="detailsControl"></app-error-message>
+  </div>
+  <div class="relative z-0 w-full mb-5 group">
+    @let phoneControl = checkoutForm.get("phone");
+
+    <app-custom-input formControlName="phone" [type]="'text'" placeholder=" ">
+      <label
+        for="floating_email"
+        class="label label-style peer-focus:font-medium peer-focus:start-0 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto peer-focus:text-main peer-focus:dark:text-main peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6"
+        >phone :</label
+      >
+    </app-custom-input>
+    <!-- <input
+      type="email"
+      formControlName="email"
+      name="floating_email"
+      id="floating_email"
+      class="input-style peer"
+      placeholder=" "
+      required
+    /> -->
+
+    <app-error-message [inputControl]="phoneControl"></app-error-message>
+  </div>
+  <div class="relative z-0 w-full mb-5 group">
+    @let cityControl = checkoutForm.get("city");
+
+    <app-custom-input formControlName="city" [type]="'text'" placeholder=" ">
+      <label
+        for="floating_email"
+        class="label label-style peer-focus:font-medium peer-focus:start-0 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto peer-focus:text-main peer-focus:dark:text-main peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6"
+        >city :</label
+      >
+    </app-custom-input>
+    <!-- <input
+      type="email"
+      formControlName="email"
+      name="floating_email"
+      id="floating_email"
+      class="input-style peer"
+      placeholder=" "
+      required
+    /> -->
+
+    <app-error-message [inputControl]="cityControl"></app-error-message>
+  </div>
+  <div class="flex justify-between">
+    <button (click)="OnlinePayment()" class="main-btn" type="submit">
+      online
+    </button>
+    <button (click)="completeOrder()" class="main-btn" type="submit">
+      Cash
+    </button>
+  </div>
+</form>

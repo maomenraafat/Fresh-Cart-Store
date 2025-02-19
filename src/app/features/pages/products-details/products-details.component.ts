@@ -4,6 +4,8 @@ import { ProductService } from '../../../shared/services/product/product.service
 import { Product } from '../../../shared/interfaces/product';
 import { CarouselModule, OwlOptions } from 'ngx-owl-carousel-o';
 import { RelatedProductComponent } from './components/related-product/related-product.component';
+import { CartService } from '../../../shared/services/cart/cart.service';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-products-details',
@@ -12,6 +14,7 @@ import { RelatedProductComponent } from './components/related-product/related-pr
   styleUrl: './products-details.component.scss',
 })
 export class ProductsDetailsComponent implements OnInit {
+  isLoading: boolean = false;
   productDetails: Product = {} as Product;
   relatedProducts!: Product[];
   appiError!: string;
@@ -33,6 +36,8 @@ export class ProductsDetailsComponent implements OnInit {
   };
   private readonly _activatedRoute = inject(ActivatedRoute);
   private readonly _productService = inject(ProductService);
+  _cartService = inject(CartService);
+  _toastrService = inject(ToastrService);
 
   ngOnInit(): void {
     this.getID();
@@ -74,6 +79,23 @@ export class ProductsDetailsComponent implements OnInit {
       next: (res) => {
         console.log(res.data);
         this.relatedProducts = res.data;
+      },
+      error: (err) => {
+        console.log(err);
+      },
+      complete: () => {
+        console.log('complete!');
+      },
+    });
+  }
+
+  addToCart(id: string) {
+    this.isLoading = true;
+    this._cartService.addProductToCart(id).subscribe({
+      next: (res) => {
+        console.log(res);
+        this.isLoading = false;
+        this._toastrService.success(res.message, 'Hiiiiii!');
       },
       error: (err) => {
         console.log(err);
