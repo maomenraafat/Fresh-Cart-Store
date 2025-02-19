@@ -7,13 +7,18 @@ import {
 } from '@angular/forms';
 import { delay, Subscription, timer } from 'rxjs';
 import { AuthService } from '../../../services/auth/auth.service';
-import { Router } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 import { ErrorMessageComponent } from '../../../../shared/components/ui/error-message/error-message.component';
 import { CustomInputComponent } from '../../../../shared/components/ui/custom-input/custom-input.component';
 
 @Component({
   selector: 'app-login',
-  imports: [ReactiveFormsModule, ErrorMessageComponent, CustomInputComponent],
+  imports: [
+    ReactiveFormsModule,
+    ErrorMessageComponent,
+    CustomInputComponent,
+    RouterLink,
+  ],
   templateUrl: './login.component.html',
   styleUrl: './login.component.scss',
 })
@@ -55,13 +60,14 @@ export class LoginComponent implements OnInit {
             this.isCallingApi = false;
             localStorage.setItem('userToken', data.token);
             this._authService.saveUser();
+            this._router.navigate(['/home']);
             // setTimeout(() => {
             //   this._router.navigate(['/home']);
             // }, 2000);
 
-            timer(2000).subscribe(() => {
-              this._router.navigate(['/home']);
-            });
+            // timer(2000).subscribe(() => {
+            //   this._router.navigate(['/home']);
+            // });
             // delay()
           },
           error: (err) => {

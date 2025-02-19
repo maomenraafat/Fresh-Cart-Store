@@ -1,1 +1,7 @@
-<p>brands works!</p>
+<h1 class="capitalize text-center text-main text-4xl my-5">all brands</h1>
+
+<div class="grid grid-cols-4 gap-5 my-7">
+  @for (brand of brands; track $index) {
+  <app-card-item [item]="brand"></app-card-item>
+  }
+</div>

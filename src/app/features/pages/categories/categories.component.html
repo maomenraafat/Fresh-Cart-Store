@@ -1,1 +1,7 @@
-<p>categories works!</p>
+<h1 class="capitalize text-center text-main text-4xl my-5">all categories</h1>
+
+<div class="grid grid-cols-4 gap-5 my-7">
+  @for (category of categories; track $index) {
+  <app-card-item [item]="category"></app-card-item>
+  }
+</div>

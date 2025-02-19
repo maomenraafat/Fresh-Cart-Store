@@ -22,7 +22,13 @@
       [id]="floating_email"
       placeholder=" "
       class="peer"
-    />
+    >
+      <label
+        for="floating_email"
+        class="label label-style peer-focus:font-medium peer-focus:start-0 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto peer-focus:text-main peer-focus:dark:text-main peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6"
+        >User Email :</label
+      >
+    </app-custom-input>
     <!-- <input
       type="email"
       formControlName="email"
@@ -32,11 +38,7 @@
       placeholder=" "
       required
     /> -->
-    <label
-      for="floating_email"
-      class="label-style peer-focus:font-medium peer-focus:start-0 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto peer-focus:text-main peer-focus:dark:text-main peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6"
-      >User Email :</label
-    >
+
     <app-error-message [inputControl]="emailControl"></app-error-message>
   </div>
   <div class="relative z-0 w-full mb-5 group">
@@ -45,7 +47,13 @@
       formControlName="password"
       [type]="!toggleInput ? 'password' : 'text'"
       [id]="floating_password"
-    />
+    >
+      <label
+        for="floating_password"
+        class="label label-style peer-focus:font-medium peer-focus:start-0 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto peer-focus:text-main peer-focus:dark:text-main peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6"
+        >Password :</label
+      >
+    </app-custom-input>
 
     <!-- <input
       [type]="!toggleInput ? 'password' : 'text'"
@@ -56,11 +64,11 @@
       placeholder=" "
       required
     /> -->
-    <label
+    <!-- <label
       for="floating_password"
-      class="label-style peer-focus:font-medium peer-focus:start-0 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto peer-focus:text-main peer-focus:dark:text-main peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6"
+      class="label label-style peer-focus:font-medium peer-focus:start-0 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto peer-focus:text-main peer-focus:dark:text-main peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6"
       >Password :</label
-    >
+    > -->
     <span class="absolute top-[10%] right-0" (click)="togglePassword()">
       @if (!toggleInput) { <i class="fa fa-eye"></i>} @else {<i
         class="fa fa-eye-slash"
@@ -70,9 +78,16 @@
     <app-error-message [inputControl]="passwordControl"></app-error-message>
   </div>
 
-  <button type="submit" class="main-btn">
-    @if (isCallingApi) {
-    <i class="fa fa-spin fa-spinner"></i>
-    }@else{ Login }
-  </button>
+  <div class="flex justify-between items-center">
+    <button type="submit" class="main-btn">
+      @if (isCallingApi) {
+      <i class="fa fa-spin fa-spinner"></i>
+      }@else{ Login }
+    </button>
+    <a
+      class="capitalize text-main inline-block"
+      [routerLink]="['/auth/forget-password']"
+      >forget password ?</a
+    >
+  </div>
 </form>
