@@ -1,6 +1,10 @@
 import { HttpClient } from '@angular/common/http';
 import { afterNextRender, inject, Injectable } from '@angular/core';
-import { AuthUser, LoginUser } from '../../interfaces/auth-user';
+import {
+  AuthUser,
+  LoginUser,
+  ResetUserPassword,
+} from '../../interfaces/auth-user';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { API_BASE_URL } from '../../../token/api-token';
 import { jwtDecode } from 'jwt-decode';
@@ -46,5 +50,25 @@ export class AuthService {
     localStorage.removeItem('userToken');
     this.userData.next(null);
     this._router.navigate(['/auth/login']);
+  }
+
+  forgetPassword(email: string): Observable<any> {
+    return this._httpClient.post(
+      `${this._baseUrl}/auth/forgotPasswords`,
+      email
+    );
+  }
+  verifyResetCode(resetCode: string): Observable<any> {
+    return this._httpClient.post(
+      `${this._baseUrl}/auth/verifyResetCode`,
+      resetCode
+    );
+  }
+
+  resetPassword(userInfo: ResetUserPassword): Observable<any> {
+    return this._httpClient.put(
+      `${this._baseUrl}/auth/resetPassword`,
+      userInfo
+    );
   }
 }

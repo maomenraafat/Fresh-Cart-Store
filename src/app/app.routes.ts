@@ -32,6 +32,14 @@ export const routes: Routes = [
             './core/pages/auth/forget-password/forget-password.component'
           ).then((c) => c.ForgetPasswordComponent),
       },
+      {
+        path: 'reset-password',
+        canActivate: [loggedUserGuard],
+        loadComponent: () =>
+          import(
+            './core/pages/auth/reset-password/reset-password.component'
+          ).then((c) => c.ResetPasswordComponent),
+      },
     ],
   },
   // {
@@ -87,6 +95,22 @@ export const routes: Routes = [
     loadComponent: () =>
       import('./features/pages/cart/cart.component').then(
         (c) => c.CartComponent
+      ),
+  },
+  {
+    path: 'checkout/:id',
+    canActivate: [authGuard],
+    loadComponent: () =>
+      import('./features/pages/checkout/checkout.component').then(
+        (c) => c.CheckoutComponent
+      ),
+  },
+  {
+    path: 'orders/users/:id',
+    canActivate: [authGuard],
+    loadComponent: () =>
+      import('./features/pages/orders/orders.component').then(
+        (c) => c.OrdersComponent
       ),
   },
   {

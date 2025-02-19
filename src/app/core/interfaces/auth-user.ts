@@ -9,3 +9,7 @@ export interface LoginUser {
   email: string;
   password: string;
 }
+export interface ResetUserPassword {
+  email: string;
+  newPassword: string;
+}
