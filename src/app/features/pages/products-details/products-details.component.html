@@ -1,4 +1,4 @@
-@if (appiError) {
+@if (apiError) {
 <h2 class="text-5xl text-main mx-auto text-center capitalize">
   failed to get this product
 </h2>
@@ -14,7 +14,7 @@
     </owl-carousel-o>
   </div>
   <div class="w-[60%]">
-    <h1 class="text-4xl mb3">{{ productDetails.title }}</h1>
+    <h1 class="text-4xl mb-3">{{ productDetails.title }}</h1>
     <p class="mb-8">{{ productDetails.description }}</p>
     <span>{{ productDetails.category.name }}</span>
     <div class="flex justify-between mb-3">

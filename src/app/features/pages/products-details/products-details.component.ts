@@ -17,7 +17,7 @@ export class ProductsDetailsComponent implements OnInit {
   isLoading: boolean = false;
   productDetails: Product = {} as Product;
   relatedProducts!: Product[];
-  appiError!: string;
+  apiError!: string;
 
   customOptions: OwlOptions = {
     loop: true,
@@ -36,8 +36,8 @@ export class ProductsDetailsComponent implements OnInit {
   };
   private readonly _activatedRoute = inject(ActivatedRoute);
   private readonly _productService = inject(ProductService);
-  _cartService = inject(CartService);
-  _toastrService = inject(ToastrService);
+  private readonly _cartService = inject(CartService);
+  private readonly _toastrService = inject(ToastrService);
 
   ngOnInit(): void {
     this.getID();
@@ -66,8 +66,8 @@ export class ProductsDetailsComponent implements OnInit {
       },
       error: (err) => {
         console.log(err);
-        this.appiError = err.error.message;
-        console.log(this.appiError);
+        this.apiError = err.error.message;
+        console.log(this.apiError);
       },
       complete: () => {
         console.log('complete!');
@@ -95,7 +95,7 @@ export class ProductsDetailsComponent implements OnInit {
       next: (res) => {
         console.log(res);
         this.isLoading = false;
-        this._toastrService.success(res.message, 'Hiiiiii!');
+        this._toastrService.success(res.message, 'FreshCart!');
       },
       error: (err) => {
         console.log(err);
