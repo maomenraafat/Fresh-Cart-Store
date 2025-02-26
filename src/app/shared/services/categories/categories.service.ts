@@ -15,4 +15,7 @@ export class CategoriesService {
   getAllCategories(): Observable<any> {
     return this._httpClient.get(`${this._baseUrl}/categories`);
   }
+  getSpecificCategory(id: string): Observable<any> {
+    return this._httpClient.get(`${this._baseUrl}/categories/${id}`);
+  }
 }

@@ -15,4 +15,8 @@ export class BrandService {
   getAllBrands(): Observable<any> {
     return this._httpClient.get(`${this._baseUrl}/brands`);
   }
+
+  getSpecificBrands(id: string): Observable<any> {
+    return this._httpClient.get(`${this._baseUrl}/brands/${id}`);
+  }
 }

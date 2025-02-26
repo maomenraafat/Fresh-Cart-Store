@@ -1,0 +1,12 @@
+<div class="rounded-lg my-5 p-10">
+  <div class="flex flex-wrap justify-around items-center">
+    <img [src]="categoryDetails?.image" class="w-[450px] rounded-lg" alt="" />
+    <h2 class="text-4xl text-main font-bold">{{ categoryDetails?.name }}</h2>
+  </div>
+</div>
+
+<h2 #related class="text-4xl font-bold my-7">Related Product</h2>
+
+@defer (on viewport (related) ; on timer(10000ms) ) {
+<app-related-product [relatedProducts]="relatedProducts"></app-related-product>
+}

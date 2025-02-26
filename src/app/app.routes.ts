@@ -66,11 +66,27 @@ export const routes: Routes = [
       ),
   },
   {
+    path: 'categories/:id',
+    canActivate: [authGuard],
+    loadComponent: () =>
+      import(
+        './features/pages/category-details/category-details.component'
+      ).then((c) => c.CategoryDetailsComponent),
+  },
+  {
     path: 'brands',
     canActivate: [authGuard],
     loadComponent: () =>
       import('./features/pages/brands/brands.component').then(
         (c) => c.BrandsComponent
+      ),
+  },
+  {
+    path: 'brands/:id',
+    canActivate: [authGuard],
+    loadComponent: () =>
+      import('./features/pages/brand-details/brand-details.component').then(
+        (c) => c.BrandDetailsComponent
       ),
   },
   {
@@ -98,6 +114,14 @@ export const routes: Routes = [
       ),
   },
   {
+    path: 'wishList',
+    canActivate: [authGuard],
+    loadComponent: () =>
+      import('./features/pages/wishlist/wishlist.component').then(
+        (c) => c.WishlistComponent
+      ),
+  },
+  {
     path: 'checkout/:id',
     canActivate: [authGuard],
     loadComponent: () =>
@@ -106,7 +130,15 @@ export const routes: Routes = [
       ),
   },
   {
-    path: 'orders/users/:id',
+    path: 'orders',
+    canActivate: [authGuard],
+    loadComponent: () =>
+      import('./features/pages/orders/orders.component').then(
+        (c) => c.OrdersComponent
+      ),
+  },
+  {
+    path: 'orders/users/**',
     canActivate: [authGuard],
     loadComponent: () =>
       import('./features/pages/orders/orders.component').then(

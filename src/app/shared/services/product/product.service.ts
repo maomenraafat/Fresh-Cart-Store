@@ -12,10 +12,22 @@ export class ProductService {
 
   constructor() {}
 
-  getProducts(categoryId?: string): Observable<any> {
-    let url = categoryId
-      ? `${this._baseUrl}/products?category[in]=${categoryId}`
-      : `${this._baseUrl}/products`;
+  // getProducts(categoryId?: string ,brand?:string): Observable<any> {
+  //   let url = categoryId
+  //     ? `${this._baseUrl}/products?category[in]=${categoryId}`
+  //     : `${this._baseUrl}/products`;
+  //   return this._httpClient.get(url);
+  // }
+
+  getProducts(categoryId?: string, brandId?: string): Observable<any> {
+    let url = `${this._baseUrl}/products`;
+    if (categoryId) {
+      url += `?category[in]=${categoryId}`;
+    }
+    if (brandId) {
+      url += categoryId ? `&brand=${brandId}` : `?brand=${brandId}`;
+    }
+
     return this._httpClient.get(url);
   }
   getProductsById(id: string): Observable<any> {

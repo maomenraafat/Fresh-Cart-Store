@@ -2,6 +2,6 @@
 
 <div class="grid grid-cols-4 gap-5 my-7">
   @for (brand of brands; track $index) {
-  <app-card-item [item]="brand"></app-card-item>
+  <app-card-item [item]="brand" [itemName]="namePage"></app-card-item>
   }
 </div>

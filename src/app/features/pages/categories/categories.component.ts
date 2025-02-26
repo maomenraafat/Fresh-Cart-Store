@@ -1,7 +1,7 @@
 import { Component, inject, OnInit } from '@angular/core';
 import { CategoriesService } from '../../../shared/services/categories/categories.service';
 import { Category } from '../../../shared/interfaces/category';
-import { CardItemComponent } from "../../../shared/components/ui/card-item/card-item.component";
+import { CardItemComponent } from '../../../shared/components/ui/card-item/card-item.component';
 
 @Component({
   selector: 'app-categories',
@@ -10,6 +10,7 @@ import { CardItemComponent } from "../../../shared/components/ui/card-item/card-
   styleUrl: './categories.component.scss',
 })
 export class CategoriesComponent implements OnInit {
+  namePage: string = '/categories';
   _categoriesService = inject(CategoriesService);
   categories!: Category[];
 

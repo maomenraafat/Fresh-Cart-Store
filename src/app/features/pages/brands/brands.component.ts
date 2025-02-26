@@ -10,6 +10,8 @@ import { CardItemComponent } from '../../../shared/components/ui/card-item/card-
   styleUrl: './brands.component.scss',
 })
 export class BrandsComponent {
+  namePage: string = '/brands';
+
   _brandService = inject(BrandService);
   brands!: Brand[];
 
