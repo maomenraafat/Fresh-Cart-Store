@@ -27,7 +27,7 @@
               >Home</a
             >
           </li>
-          <li>
+          <!-- <li>
             <a
               routerLink="/cart"
               routerLinkActive="!text-main"
@@ -35,7 +35,7 @@
               aria-current="page"
               >Cart</a
             >
-          </li>
+          </li> -->
           <li>
             <a
               routerLink="/products"
@@ -63,12 +63,30 @@
               >Brands</a
             >
           </li>
+          <li>
+            <a
+              routerLink="/wishList"
+              routerLinkActive="!text-main"
+              class="block py-2 px-3 text-gray rounded-sm md:bg-transparent md:text-gray md:p-0 dark:text-gray md:dark:text-gray"
+              aria-current="page"
+              >Wish List</a
+            >
+          </li>
+          <li>
+            <a
+              routerLink="/orders"
+              routerLinkActive="!text-main"
+              class="block py-2 px-3 text-gray rounded-sm md:bg-transparent md:text-gray md:p-0 dark:text-gray md:dark:text-gray"
+              aria-current="page"
+              >Orders</a
+            >
+          </li>
         </ul>
         }
       </div>
     </div>
 
-    <div class="flex item-center gap-x-3">
+    <div class="flex item-center gap-x-8">
       <ul class="flex gap-x-3">
         <li>
           <i class="fa-brands fa-facebook"></i>
@@ -89,9 +107,20 @@
           <i class="fa-brands fa-youtube"></i>
         </li>
       </ul>
-      <ul class="flex gap-x-3">
+      <ul class="flex gap-x-5">
         @if (isLoggedIn | async) {
-        <li>
+
+        <li class="flex items-center justify-center gap-x-5 text-3xl relative">
+          <a routerLink="/cart" routerLinkActive="!text-main">
+            <i class="fa-solid fa-cart-shopping text-main"></i>
+            @if (countOfCartItems > 0) {
+            <span
+              class="bg-green-300 text-black text-xs font-medium me-2 px-2.5 py-0.5 rounded-full absolute bottom-5 left-6"
+              >{{ countOfCartItems }}</span
+            >}
+          </a>
+        </li>
+        <li class="flex items-center justify-center gap-x-3">
           <p (click)="signOut()" class="cursor-pointer">Signout</p>
         </li>
         }@else {

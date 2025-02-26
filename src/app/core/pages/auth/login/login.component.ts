@@ -10,6 +10,7 @@ import { AuthService } from '../../../services/auth/auth.service';
 import { Router, RouterLink } from '@angular/router';
 import { ErrorMessageComponent } from '../../../../shared/components/ui/error-message/error-message.component';
 import { CustomInputComponent } from '../../../../shared/components/ui/custom-input/custom-input.component';
+import { CartService } from '../../../../shared/services/cart/cart.service';
 
 @Component({
   selector: 'app-login',
@@ -31,6 +32,7 @@ export class LoginComponent implements OnInit {
   toggleInput!: boolean;
   loginForm!: FormGroup;
   _authService = inject(AuthService);
+  _cartService = inject(CartService);
   _router = inject(Router);
   ngOnInit(): void {
     this.initForm();
@@ -61,6 +63,12 @@ export class LoginComponent implements OnInit {
             localStorage.setItem('userToken', data.token);
             this._authService.saveUser();
             this._router.navigate(['/home']);
+            this._cartService.getLoggedUserCart().subscribe({
+              next: (res) => {
+                // console.log(value);
+                this._cartService.numOfCartItems.next(res.numOfCartItems);
+              },
+            });
             // setTimeout(() => {
             //   this._router.navigate(['/home']);
             // }, 2000);
