@@ -5,10 +5,12 @@ import {
   ReactiveFormsModule,
   Validators,
 } from '@angular/forms';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { ErrorMessageComponent } from '../../../shared/components/ui/error-message/error-message.component';
 import { CustomInputComponent } from '../../../shared/components/ui/custom-input/custom-input.component';
 import { OrderService } from '../../../shared/services/order/order.service';
+import { ToastrService } from 'ngx-toastr';
+import { CartService } from '../../../shared/services/cart/cart.service';
 
 @Component({
   selector: 'app-checkout',
@@ -21,6 +23,9 @@ export class CheckoutComponent implements OnInit {
   cartId!: string;
   private readonly _activatedRoute = inject(ActivatedRoute);
   private readonly _orderService = inject(OrderService);
+  private readonly _toastrService = inject(ToastrService);
+  private readonly _cartService = inject(CartService);
+  private readonly _router = inject(Router);
   ngOnInit(): void {
     this.getCartId();
     this.initForm();
@@ -34,7 +39,10 @@ export class CheckoutComponent implements OnInit {
     this.checkoutForm = new FormGroup({
       details: new FormControl(null, [Validators.required]),
       city: new FormControl(null, [Validators.required]),
-      phone: new FormControl(null, [Validators.required]),
+      phone: new FormControl(null, [
+        Validators.required,
+        Validators.pattern(/^01[0125][0-9]{8}$/),
+      ]),
     });
   }
 
@@ -47,6 +55,12 @@ export class CheckoutComponent implements OnInit {
         .subscribe({
           next: (res) => {
             console.log(res);
+            this._toastrService.success(
+              'Thank you for shopping with us!',
+              'Fresh Cart '
+            );
+            this._cartService.numOfCartItems.next(0);
+            this._router.navigate(['/orders']);
           },
           error: (err) => {
             console.log(err);
@@ -69,6 +83,7 @@ export class CheckoutComponent implements OnInit {
             if (res.status === 'success') {
               open(res.session.url, '_self');
             }
+            this._cartService.numOfCartItems.next(0);
           },
           error: (err) => {
             console.log(err);
