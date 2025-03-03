@@ -78,8 +78,8 @@
     <app-error-message [inputControl]="passwordControl"></app-error-message>
   </div>
 
-  <div class="flex justify-between items-center">
-    <button type="submit" class="main-btn">
+  <div class="flex justify-between items-center gap-x-4 md:gap-x-0">
+    <button type="submit" class="max-w-[50%] main-btn">
       @if (isCallingApi) {
       <i class="fa fa-spin fa-spinner"></i>
       }@else{ Login }

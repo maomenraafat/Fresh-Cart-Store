@@ -2,7 +2,9 @@
 <section class="cart p-8 bg-gray-50 rounded-lg shadow-md">
   <!-- Cart Header -->
   <div class="cart__header my-7">
-    <div class="flex flex-col md:flex-row items-center justify-between mb-7">
+    <div
+      class="flex flex-col md:flex-row items-center justify-between mb-7 gap-y-4"
+    >
       <h1 class="capitalize text-main font-bold text-4xl">Shopping Cart</h1>
       <button
         (click)="clearCart()"
@@ -13,7 +15,7 @@
     </div>
 
     <div
-      class="flex flex-col md:flex-row items-center justify-between text-xl font-semibold text-gray-800"
+      class="flex flex-col md:flex-row items-center justify-between gap-y-4 text-xl font-semibold text-gray-800"
     >
       <h2>Total Items: {{ cartDetails?.numOfCartItems }}</h2>
       <p class="text-main">
@@ -45,14 +47,14 @@
           <td class="p-4">
             <img
               [src]="product.product.imageCover"
-              class="w-16 md:w-32 rounded-md shadow-sm"
+              class="w-24 sm:w-16 md:w-32 rounded-md shadow-md"
               alt="{{ product.product.title }}"
             />
           </td>
 
           <!-- Product Name -->
           <td class="px-6 py-4 font-semibold text-gray-900">
-            {{ product.product.title }}
+            {{ product.product.title.split(" ").splice(0, 3).join(" ") }}
           </td>
 
           <!-- Quantity Controls -->
@@ -60,14 +62,14 @@
             <div class="flex items-center gap-3">
               <button
                 (click)="UpdateCart(product.product._id, product.count - 1)"
-                class="h-8 w-8 flex items-center justify-center border border-gray-300 rounded-full bg-white hover:bg-gray-200 transition"
+                class="h-5 w-5 md:h-8 md:w-8 flex items-center justify-center border border-gray-300 rounded-full bg-white hover:bg-gray-200 transition"
               >
                 <i class="fa fa-minus text-gray-600"></i>
               </button>
               <span class="font-medium text-lg">{{ product.count }}</span>
               <button
                 (click)="UpdateCart(product.product._id, product.count + 1)"
-                class="h-8 w-8 flex items-center justify-center border border-gray-300 rounded-full bg-white hover:bg-gray-200 transition"
+                class="h-5 w-5 md:h-8 md:w-8 flex items-center justify-center border border-gray-300 rounded-full bg-white hover:bg-gray-200 transition"
               >
                 <i class="fa fa-plus text-gray-600"></i>
               </button>

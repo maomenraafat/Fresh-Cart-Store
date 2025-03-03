@@ -42,13 +42,13 @@ export const routes: Routes = [
       },
     ],
   },
-  // {
-  //   path: '',
-  //   loadComponent: () =>
-  //     import('./core/pages/auth/login/login.component').then(
-  //       (c) => c.LoginComponent
-  //     ),
-  // },
+  {
+    path: '',
+    loadComponent: () =>
+      import('./core/pages/auth/login/login.component').then(
+        (c) => c.LoginComponent
+      ),
+  },
   {
     path: 'home',
     canActivate: [authGuard],

@@ -1,6 +1,7 @@
 import {
   afterNextRender,
   Component,
+  Inject,
   inject,
   OnInit,
   PLATFORM_ID,
@@ -22,7 +23,14 @@ export class NavbarComponent implements OnInit {
   _PLATFORM_ID = inject(PLATFORM_ID);
   isLoggedIn!: any;
   countOfCartItems!: number;
-  constructor() {}
+  constructor(@Inject(PLATFORM_ID) private platformId: any) {}
+  loadFlowbite(callback: (flowbite: any) => void) {
+    if (isPlatformBrowser(this.platformId)) {
+      import('flowbite').then((flowbite) => {
+        callback(flowbite);
+      });
+    }
+  }
 
   ngOnInit(): void {
     this.checkLoggedInStatus();
@@ -35,7 +43,6 @@ export class NavbarComponent implements OnInit {
       if (localStorage.getItem('userToken')) {
         this._cartService.getLoggedUserCart().subscribe({
           next: (res) => {
-            // console.log(value);
             this._cartService.numOfCartItems.next(res.numOfCartItems);
           },
         });
@@ -44,7 +51,6 @@ export class NavbarComponent implements OnInit {
 
     this._cartService.numOfCartItems.subscribe({
       next: (value) => {
-        // console.log(value);
         this.countOfCartItems = value;
       },
     });
@@ -52,14 +58,6 @@ export class NavbarComponent implements OnInit {
 
   checkLoggedInStatus() {
     this.isLoggedIn = this._authService.userData;
-    // this._authService.userData.subscribe({
-    //   next: (res) => {
-    //     console.log(res, 'hleelo jjj');
-    //     this.isLoggedIn = res;
-    //   },
-    // });
-    // console.log(this._authService.userData, 'hello');
-    // console.log(this._authService.userData.asObservable(), 'hello');
   }
 
   signOut() {
