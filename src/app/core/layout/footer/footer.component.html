@@ -1,32 +1,71 @@
 <footer class="footer bg-[#f1f3f2] py-10">
-  <div class="container">
-    <h2 class="footer__title text-3xl mb-3">Get the freshCart app</h2>
-    <p class="footer__desc mb-3">
-      We Will send you alink, open it on your phone to download the app
+  <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+    <!-- Title and Description -->
+    <h2
+      class="footer__title text-2xl sm:text-3xl font-bold text-gray-800 mb-3 text-center sm:text-left"
+    >
+      Get the FreshCart App
+    </h2>
+    <p class="footer__desc text-gray-600 mb-6 text-center sm:text-left">
+      We will send you a link, open it on your phone to download the app.
     </p>
-    <div class="footer__subscription flex gap-x-3 mb-8">
+
+    <!-- Subscription Section -->
+    <div class="footer__subscription flex flex-col sm:flex-row gap-3 mb-8">
       <input
         type="text"
-        class="w-[90%] rounded-md focus:border-main focus:shadow-main focus:ring-main"
+        class="w-full sm:w-[75%] px-4 py-2 rounded-md border border-gray-300 focus:border-main focus:ring-2 focus:ring-main focus:outline-none transition-all"
+        placeholder="Enter your email"
       />
-      <button class="bg-main text-white w-[10%] rounded-md px-3 py-1">
+      <button
+        class="w-full sm:w-[25%] bg-main text-white px-4 py-2 rounded-md hover:bg-main-dark transition-colors"
+      >
         Share App
       </button>
     </div>
+
+    <!-- Payment and App Downloads Section -->
     <div
-      class="footer__payment flex flex-wrap justify-between border-[#d8dad7] border-t-2 border-b-2 py-5"
+      class="footer__payment flex flex-col sm:flex-row justify-between items-center gap-6 sm:gap-0 border-t-2 border-b-2 border-[#d8dad7] py-6"
     >
-      <div class="flex flex-wrap items-center gap-x-3">
-        <p>payment partners</p>
-        <img src="/images/amazon-pay.png" class="w-16" alt="" />
-        <img src="/images/American-Express-Color.png" class="w-16" alt="" />
-        <img src="/images/mastercard.webp" class="w-16" alt="" />
-        <img src="/images/paypal.png" class="w-16" alt="" />
+      <!-- Payment Partners -->
+      <div class="flex flex-wrap items-center gap-3">
+        <p class="text-gray-700 font-medium">Payment Partners</p>
+        <div class="flex flex-wrap items-center gap-3">
+          <img
+            src="/images/amazon-pay.png"
+            class="w-12 sm:w-16"
+            alt="Amazon Pay"
+          />
+          <img
+            src="/images/American-Express-Color.png"
+            class="w-12 sm:w-16"
+            alt="American Express"
+          />
+          <img
+            src="/images/mastercard.webp"
+            class="w-12 sm:w-16"
+            alt="Mastercard"
+          />
+          <img src="/images/paypal.png" class="w-12 sm:w-16" alt="PayPal" />
+        </div>
       </div>
-      <div class="flex flex-wrap items-center gap-x-3">
-        <p>get deliveries with freshCart</p>
-        <img src="/images/get-apple-store.png" class="w-16" alt="" />
-        <img src="/images/get-google-play.png" class="w-16" alt="" />
+
+      <!-- App Downloads -->
+      <div class="flex flex-wrap items-center gap-3">
+        <p class="text-gray-700 font-medium">Get Deliveries with FreshCart</p>
+        <div class="flex flex-wrap items-center gap-3">
+          <img
+            src="/images/get-apple-store.png"
+            class="w-12 sm:w-16"
+            alt="Apple Store"
+          />
+          <img
+            src="/images/get-google-play.png"
+            class="w-12 sm:w-16"
+            alt="Google Play"
+          />
+        </div>
       </div>
     </div>
   </div>

@@ -32,11 +32,6 @@ export class CategoryDetailsComponent implements OnInit {
         this.getRelatedProducts(res?.params?.id);
       },
     });
-    // let x: any = this._activatedRoute.snapshot.params;
-    // console.log(x?.id);
-    // let { id }: any = this._activatedRoute.snapshot.params;
-    // console.log(id);
-    // this.getProductDetails(id);
   }
 
   getCategoryDetails(id: string) {

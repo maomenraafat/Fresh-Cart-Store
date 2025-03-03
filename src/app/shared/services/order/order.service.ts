@@ -9,7 +9,7 @@ import { Observable } from 'rxjs';
 export class OrderService {
   _httpClient = inject(HttpClient);
   _baseUrl = inject(API_BASE_URL);
-  token = JSON.stringify(localStorage.getItem('userToken'));
+ 
   constructor() {}
 
   createCashOrder(
@@ -19,7 +19,6 @@ export class OrderService {
     return this._httpClient.post(
       `${this._baseUrl}/orders/${id}`,
       { shippingAddress },
-      { headers: { token: JSON.parse(this.token) } }
     );
   }
   getAllOrders(): Observable<any> {
@@ -36,7 +35,6 @@ export class OrderService {
       `${this._baseUrl}/orders/checkout-session/${id}?url=http://localhost:4200
 `,
       { shippingAddress },
-      { headers: { token: JSON.parse(this.token) } }
     );
   }
 }

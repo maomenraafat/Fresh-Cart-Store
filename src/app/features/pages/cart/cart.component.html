@@ -1,36 +1,35 @@
-@if (cartDetails?.numOfCartItems !=0 && emptyCart===false) {
-
-<section class="cart p-8">
+@if (cartDetails?.numOfCartItems != 0 && emptyCart === false) {
+<section class="cart p-8 bg-gray-50 rounded-lg shadow-md">
+  <!-- Cart Header -->
   <div class="cart__header my-7">
-    <div class="flex items-center justify-between mb-7">
-      <h1 class="capitalize text-main font-bold text-4xl">cart shop</h1>
+    <div class="flex flex-col md:flex-row items-center justify-between mb-7">
+      <h1 class="capitalize text-main font-bold text-4xl">Shopping Cart</h1>
       <button
         (click)="clearCart()"
-        class="bg-red-500 text-white p-2 rounded-md"
+        class="bg-red-500 text-white px-4 py-2 rounded-md hover:bg-red-600 transition"
       >
-        Clear
+        Clear Cart
       </button>
     </div>
 
-    <div class="flex items-center justify-between">
-      <h2 class="text-3xl font-semibold">
-        Total Cart Items : {{ cartDetails?.numOfCartItems }}
-      </h2>
-      <p class="text-3xl font-semibold me-4">
-        Total Cart Price : {{ cartDetails?.data?.totalCartPrice }}
+    <div
+      class="flex flex-col md:flex-row items-center justify-between text-xl font-semibold text-gray-800"
+    >
+      <h2>Total Items: {{ cartDetails?.numOfCartItems }}</h2>
+      <p class="text-main">
+        Total Price: $ {{ cartDetails?.data?.totalCartPrice }}
       </p>
     </div>
   </div>
 
-  <div class="cart__body relative overflow-x-auto shadow-md sm:rounded-lg my-7">
-    <table
-      class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400"
-    >
-      <thead
-        class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400"
-      >
+  <!-- Cart Body -->
+  <div
+    class="cart__body relative overflow-x-auto shadow-md sm:rounded-lg my-7 bg-white p-5"
+  >
+    <table class="w-full text-sm text-left rtl:text-right text-gray-700">
+      <thead class="text-xs text-gray-700 uppercase bg-gray-100">
         <tr>
-          <th scope="col" class="px-16 py-3">
+          <th scope="col" class="px-6 py-3">
             <span class="sr-only">Image</span>
           </th>
           <th scope="col" class="px-6 py-3">Product</th>
@@ -41,79 +40,52 @@
       </thead>
       <tbody>
         @for (product of cartDetails?.data?.products; track $index) {
-        <tr
-          class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 border-gray-200 hover:bg-gray-50 dark:hover:bg-gray-600"
-        >
+        <tr class="border-b hover:bg-gray-50 transition">
+          <!-- Product Image -->
           <td class="p-4">
             <img
               [src]="product.product.imageCover"
-              class="w-16 md:w-32 max-w-full max-h-full"
-              alt="Apple Watch"
+              class="w-16 md:w-32 rounded-md shadow-sm"
+              alt="{{ product.product.title }}"
             />
           </td>
-          <td class="px-6 py-4 font-semibold text-gray-900 dark:text-white">
+
+          <!-- Product Name -->
+          <td class="px-6 py-4 font-semibold text-gray-900">
             {{ product.product.title }}
           </td>
+
+          <!-- Quantity Controls -->
           <td class="px-6 py-4">
-            <div class="flex items-center">
+            <div class="flex items-center gap-3">
               <button
                 (click)="UpdateCart(product.product._id, product.count - 1)"
-                class="inline-flex items-center justify-center p-1 me-3 text-sm font-medium h-6 w-6 text-gray-500 bg-white border border-gray-300 rounded-full focus:outline-none hover:bg-gray-100 focus:ring-4 focus:ring-gray-200 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:bg-gray-700 dark:hover:border-gray-600 dark:focus:ring-gray-700"
-                type="button"
+                class="h-8 w-8 flex items-center justify-center border border-gray-300 rounded-full bg-white hover:bg-gray-200 transition"
               >
-                <span class="sr-only">Quantity button</span>
-                <svg
-                  class="w-3 h-3"
-                  aria-hidden="true"
-                  xmlns="http://www.w3.org/2000/svg"
-                  fill="none"
-                  viewBox="0 0 18 2"
-                >
-                  <path
-                    stroke="currentColor"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    stroke-width="2"
-                    d="M1 1h16"
-                  />
-                </svg>
+                <i class="fa fa-minus text-gray-600"></i>
               </button>
-              <div>
-                {{ product.count }}
-              </div>
+              <span class="font-medium text-lg">{{ product.count }}</span>
               <button
                 (click)="UpdateCart(product.product._id, product.count + 1)"
-                class="inline-flex items-center justify-center h-6 w-6 p-1 ms-3 text-sm font-medium text-gray-500 bg-white border border-gray-300 rounded-full focus:outline-none hover:bg-gray-100 focus:ring-4 focus:ring-gray-200 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:bg-gray-700 dark:hover:border-gray-600 dark:focus:ring-gray-700"
-                type="button"
+                class="h-8 w-8 flex items-center justify-center border border-gray-300 rounded-full bg-white hover:bg-gray-200 transition"
               >
-                <span class="sr-only">Quantity button</span>
-                <svg
-                  class="w-3 h-3"
-                  aria-hidden="true"
-                  xmlns="http://www.w3.org/2000/svg"
-                  fill="none"
-                  viewBox="0 0 18 18"
-                >
-                  <path
-                    stroke="currentColor"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    stroke-width="2"
-                    d="M9 1v16M1 9h16"
-                  />
-                </svg>
+                <i class="fa fa-plus text-gray-600"></i>
               </button>
             </div>
           </td>
-          <td class="px-6 py-4 font-semibold text-gray-900 dark:text-white">
-            {{ product.price }}
+
+          <!-- Price -->
+          <td class="px-6 py-4 font-semibold text-gray-900">
+            $ {{ product.price }}
           </td>
+
+          <!-- Remove Button -->
           <td class="px-6 py-4">
             <button
               (click)="removeItemFromCart(product.product._id)"
-              class="font-medium text-red-600 dark:text-red-500 hover:underline"
+              class="text-red-600 font-medium hover:underline transition"
             >
-              Remove
+              <i class="fa fa-trash"></i> Remove
             </button>
           </td>
         </tr>
@@ -121,16 +93,19 @@
       </tbody>
     </table>
   </div>
-  <a
-    [routerLink]="['/checkout', cartDetails?.cartId]"
-    class="bg-main inline-block text-white p-4 mb-3 rounded-md"
-  >
-    continue</a
-  >
-</section>
 
-}@else {
-<h1 class="text-5xl text-main mx-auto text-center capitalize">
-  No Cart Items ...........
+  <!-- Checkout Button -->
+  <div class="text-center mt-5">
+    <a
+      [routerLink]="['/checkout', cartDetails?.cartId]"
+      class="bg-main text-white px-6 py-3 rounded-md font-semibold hover:bg-green-600 transition"
+    >
+      Proceed to Checkout
+    </a>
+  </div>
+</section>
+} @else {
+<h1 class="text-4xl text-main mx-auto text-center capitalize my-10">
+  No Items in Cart
 </h1>
 }

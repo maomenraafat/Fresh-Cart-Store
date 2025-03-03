@@ -24,7 +24,6 @@ export class ProductItemComponent implements OnInit, OnChanges {
   @Output() fireAddToCart: EventEmitter<string> = new EventEmitter();
   @Output() fireAddToWishList: EventEmitter<string> = new EventEmitter();
   isInWishList: boolean = false;
-  // product = Input<Product>().required;
 
   handleAddToCart(id: string) {
     this.fireAddToCart.emit(id);
@@ -35,24 +34,8 @@ export class ProductItemComponent implements OnInit, OnChanges {
   }
 
   ngOnInit(): void {
-    // console.log(this.product._id);
-    // console.log(this.wishList);
     this.get();
   }
-
-  // get() {
-  //   const productInWishlist = this.wishList.find(
-  //     (item) => item._id === this.product._id
-  //   );
-
-  //   if (productInWishlist) {
-  //     // console.log('Product is in the wishlist:', this.product._id);
-  //     // console.log('Product is in the wishlist:', productInWishlist._id);
-  //     this.isInWishList = true;
-  //   } else {
-  //     // console.log('Product not in wishlist:', this.product._id);
-  //   }
-  // }
   ngOnChanges(changes: SimpleChanges): void {
     if (changes['wishList'] || changes['product']) {
       this.get();

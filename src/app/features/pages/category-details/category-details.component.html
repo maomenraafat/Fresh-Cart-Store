@@ -1,12 +1,18 @@
-<div class="rounded-lg my-5 p-10">
-  <div class="flex flex-wrap justify-around items-center">
-    <img [src]="categoryDetails?.image" class="w-[450px] rounded-lg" alt="" />
-    <h2 class="text-4xl text-main font-bold">{{ categoryDetails?.name }}</h2>
+<div class="rounded-lg my-5 p-10 bg-gray-50 shadow-md">
+  <div class="flex flex-col lg:flex-row justify-center items-center gap-6">
+    <img
+      [src]="categoryDetails?.image"
+      class="max-w-xs md:max-w-lg lg:max-w-xl rounded-lg shadow-lg h-[500px]"
+      alt="{{ categoryDetails?.name }}"
+    />
+    <h2 class="text-4xl text-main font-bold text-center lg:text-left">
+      {{ categoryDetails?.name }}
+    </h2>
   </div>
 </div>
 
-<h2 #related class="text-4xl font-bold my-7">Related Product</h2>
+<h2 #related class="text-4xl font-bold my-7 text-center">Related Products</h2>
 
-@defer (on viewport (related) ; on timer(10000ms) ) {
+@defer (on viewport (related); on timer(10000ms)) {
 <app-related-product [relatedProducts]="relatedProducts"></app-related-product>
 }

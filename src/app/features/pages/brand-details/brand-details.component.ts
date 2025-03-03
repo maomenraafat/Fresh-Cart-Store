@@ -31,11 +31,6 @@ export class BrandDetailsComponent {
         this.getRelatedProducts(res?.params?.id);
       },
     });
-    // let x: any = this._activatedRoute.snapshot.params;
-    // console.log(x?.id);
-    // let { id }: any = this._activatedRoute.snapshot.params;
-    // console.log(id);
-    // this.getProductDetails(id);
   }
 
   getBrandsDetails(id: string) {

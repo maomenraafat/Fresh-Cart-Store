@@ -35,18 +35,19 @@
     <span class="sr-only">Search</span>
   </button>
 </form>
-@if (filteredProducts.length>0) {
+
+@if (filteredProducts.length > 0) {
 <div class="grid md:grid-cols-3 lg:grid-cols-5 gap-8 my-7">
   @for (product of filteredProducts; track $index) {
   <app-product-item
-    (fireAddToCart)="addToCart($event)"   
+    (fireAddToCart)="addToCart($event)"
     (fireAddToWishList)="addToWishList($event)"
     [product]="product"
     [wishList]="wishList"
   ></app-product-item>
   }
 </div>
-}@else{
+} @else {
 <div class="h-full my-10">
   <p class="text-center text-main text-3xl">No products found.</p>
 </div>

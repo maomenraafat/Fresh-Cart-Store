@@ -24,14 +24,28 @@
         {{ productDetails.ratingsAverage }}
       </p>
     </div>
-    <button
-      (click)="addToCart(productDetails.id)"
-      class="text-white p-2 rounded-md w-[90%] mx-auto block mt-3 bg-main transition-all duration-500 group-hover:opacity-100 translate-y-[100%] group-hover:translate-y-0 overflow-hidden"
-    >
-      @if (isLoading) {
-      <i class="fa fa-spin fa-spinner"></i>
-      }@else{Add to Cart}
-    </button>
+    <div class="flex flex-wrap justify-center items-center">
+      <button
+        (click)="addToCart(productDetails.id)"
+        class="text-white p-2 rounded-md w-[80%] mx-auto block mt-3 bg-main transition-all duration-500 hover:bg-green-600 overflow-hidden"
+      >
+        @if (isLoading) {
+        <i class="fa fa-spin fa-spinner"></i>
+        }@else{Add to Cart}
+      </button>
+      <button
+        (click)="addToWishList(productDetails._id)"
+        class="cursor-pointer block ms-auto"
+      >
+        <i
+          class="fa-solid fa-heart text-2xl transition-all duration-300"
+          [ngClass]="{
+            'text-red-500': isInWishList,
+            'text-gray-500': !isInWishList
+          }"
+        ></i>
+      </button>
+    </div>
   </div>
 </div>
 

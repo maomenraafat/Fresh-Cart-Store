@@ -1,4 +1,8 @@
-import { Component, inject, OnInit } from '@angular/core';
+import {
+  Component,
+  inject,
+  OnInit,
+} from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { ProductService } from '../../../shared/services/product/product.service';
 import { Product } from '../../../shared/interfaces/product';
@@ -6,18 +10,24 @@ import { CarouselModule, OwlOptions } from 'ngx-owl-carousel-o';
 import { RelatedProductComponent } from './components/related-product/related-product.component';
 import { CartService } from '../../../shared/services/cart/cart.service';
 import { ToastrService } from 'ngx-toastr';
+import { NgClass } from '@angular/common';
+import { WishlistService } from '../../../shared/services/wishlist.service';
+import { Wishlist } from '../../../shared/interfaces/wishlist';
 
 @Component({
   selector: 'app-products-details',
-  imports: [CarouselModule, RelatedProductComponent],
+  imports: [CarouselModule, RelatedProductComponent, NgClass],
   templateUrl: './products-details.component.html',
   styleUrl: './products-details.component.scss',
 })
 export class ProductsDetailsComponent implements OnInit {
+  isInWishList: boolean = false;
+  wishList!: Wishlist[];
   isLoading: boolean = false;
   productDetails: Product = {} as Product;
   relatedProducts!: Product[];
   apiError!: string;
+  productId!: string;
 
   customOptions: OwlOptions = {
     loop: true,
@@ -38,6 +48,7 @@ export class ProductsDetailsComponent implements OnInit {
   private readonly _productService = inject(ProductService);
   private readonly _cartService = inject(CartService);
   private readonly _toastrService = inject(ToastrService);
+  private readonly _wishlistService = inject(WishlistService);
 
   ngOnInit(): void {
     this.getID();
@@ -47,14 +58,12 @@ export class ProductsDetailsComponent implements OnInit {
     this._activatedRoute.paramMap.subscribe({
       next: (res: any) => {
         console.log(res?.params?.id);
+        this.productId = res?.params?.id;
+        this.getUserWithlist();
+        this.get();
         this.getProductDetails(res?.params?.id);
       },
     });
-    // let x: any = this._activatedRoute.snapshot.params;
-    // console.log(x?.id);
-    // let { id }: any = this._activatedRoute.snapshot.params;
-    // console.log(id);
-    // this.getProductDetails(id);
   }
 
   getProductDetails(id: string) {
@@ -104,5 +113,38 @@ export class ProductsDetailsComponent implements OnInit {
         console.log('complete!');
       },
     });
+  }
+  addToWishList(productId: string) {
+    const userInfo = { productId };
+    this._wishlistService.addProductToWishlist(userInfo).subscribe({
+      next: (res) => {
+        console.log(res);
+        this._toastrService.success(res.message, 'Fresh Cart ');
+        this.isInWishList = true;
+      },
+      error: (err) => {
+        console.log(err);
+      },
+      complete: () => {
+        console.log('complete!');
+      },
+    });
+  }
+  getUserWithlist() {
+    this._wishlistService.getLoggedUserWishlist().subscribe({
+      next: (res) => {
+        console.log(res);
+        this.wishList = res.data;
+        this.get();
+      },
+    });
+  }
+
+
+  get() {
+    if (!this.wishList) return;
+    this.isInWishList = this.wishList.some(
+      (item) => item._id === this.productId
+    );
   }
 }

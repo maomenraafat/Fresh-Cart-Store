@@ -2,9 +2,10 @@ import { Component, inject, OnInit } from '@angular/core';
 import { CategoriesService } from '../../../../../shared/services/categories/categories.service';
 import { Category } from '../../../../../shared/interfaces/category';
 import { CarouselModule, OwlOptions } from 'ngx-owl-carousel-o';
+import { RouterLink } from '@angular/router';
 @Component({
   selector: 'app-popular-categories',
-  imports: [CarouselModule],
+  imports: [CarouselModule, RouterLink],
   templateUrl: './popular-categories.component.html',
   styleUrl: './popular-categories.component.scss',
 })
@@ -14,6 +15,10 @@ export class PopularCategoriesComponent implements OnInit {
 
   customOptions: OwlOptions = {
     loop: true,
+    // autoplay: true,
+    // autoplayTimeout: 2000,
+    // autoplaySpeed: 800,
+    // autoplayHoverPause: true,
     mouseDrag: true,
     touchDrag: false,
     pullDrag: false,

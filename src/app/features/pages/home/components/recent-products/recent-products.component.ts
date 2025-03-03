@@ -31,7 +31,6 @@ export class RecentProductsComponent implements OnInit {
   getProducts() {
     this._productService.getProducts().subscribe({
       next: (data) => {
-        console.log(data);
         this.products = data.data;
         this.filteredProducts = data.data;
       },
@@ -47,7 +46,7 @@ export class RecentProductsComponent implements OnInit {
   addToCart(id: string) {
     this._cartService.addProductToCart(id).subscribe({
       next: (res) => {
-        console.log(res);
+        this.removeItemFromWishList(id);
         this._toastrService.success(res.message, 'Fresh Cart ');
         this._cartService.numOfCartItems.next(res.numOfCartItems);
       },
@@ -63,7 +62,6 @@ export class RecentProductsComponent implements OnInit {
     const userInfo = { productId };
     this._wishlistService.addProductToWishlist(userInfo).subscribe({
       next: (res) => {
-        console.log(res);
         this._toastrService.success(res.message, 'Fresh Cart ');
       },
       error: (err) => {
@@ -78,20 +76,20 @@ export class RecentProductsComponent implements OnInit {
   getUserWithlist() {
     this._wishlistService.getLoggedUserWishlist().subscribe({
       next: (res) => {
-        // for (let i = 0; i < res.data.length; i++) {
-        //   const element = res.data[i];
-        //   // console.log(element.id);
-        //   this.wishList = element.id;
-        //   // console.log(this.wishList);
-        // }
-        // console.log(res.data);
         this.wishList = res.data;
       },
     });
   }
 
+  removeItemFromWishList(id: string) {
+    this._wishlistService.removeProductFromWishlist(id).subscribe({
+      next: (res) => {
+        this.getUserWithlist();
+      },
+    });
+  }
+
   search() {
-    console.log(this.searchValue);
     if (!this.searchValue) {
       this.filteredProducts = this.products;
       return;
@@ -101,6 +99,5 @@ export class RecentProductsComponent implements OnInit {
         .toLowerCase()
         .includes(this.searchValue.toLowerCase());
     });
-    console.log(this.filteredProducts);
   }
 }

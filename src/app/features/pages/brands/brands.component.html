@@ -1,7 +1,9 @@
-<h1 class="capitalize text-center text-main text-4xl my-5">all brands</h1>
+<h1 class="capitalize text-center text-main text-4xl font-bold my-5">
+  All brands
+</h1>
 
-<div class="grid grid-cols-4 gap-5 my-7">
-  @for (brand of brands; track $index) {
-  <app-card-item [item]="brand" [itemName]="namePage"></app-card-item>
+<div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 my-7 px-4">
+  @for (category of brands; track $index) {
+  <app-card-item [item]="category" [itemName]="namePage"></app-card-item>
   }
 </div>

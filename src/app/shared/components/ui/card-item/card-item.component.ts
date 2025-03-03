@@ -14,6 +14,6 @@ export class CardItemComponent implements OnInit {
   @Input() itemName!: string;
 
   ngOnInit(): void {
-    console.log(this.itemName);
+
   }
 }

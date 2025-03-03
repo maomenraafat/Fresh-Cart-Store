@@ -5,7 +5,7 @@ import {
   ReactiveFormsModule,
   Validators,
 } from '@angular/forms';
-import { delay, Subscription, timer } from 'rxjs';
+import {  Subscription, timer } from 'rxjs';
 import { AuthService } from '../../../services/auth/auth.service';
 import { Router, RouterLink } from '@angular/router';
 import { ErrorMessageComponent } from '../../../../shared/components/ui/error-message/error-message.component';
@@ -65,21 +65,12 @@ export class LoginComponent implements OnInit {
             this._router.navigate(['/home']);
             this._cartService.getLoggedUserCart().subscribe({
               next: (res) => {
-                // console.log(value);
                 this._cartService.numOfCartItems.next(res.numOfCartItems);
               },
             });
-            // setTimeout(() => {
-            //   this._router.navigate(['/home']);
-            // }, 2000);
-
-            // timer(2000).subscribe(() => {
-            //   this._router.navigate(['/home']);
-            // });
-            // delay()
           },
           error: (err) => {
-            console.log(err);
+
             this.apiErrorMesage = err.error.message;
             this.isCallingApi = false;
           },

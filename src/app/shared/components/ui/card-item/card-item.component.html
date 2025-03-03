@@ -1,12 +1,17 @@
+
 <div
-  class="product border border-gray hover:border-main p-4 rounded-xl hover:shadow-xl transition-all mb-4 group hover:translate-y-[-1rem]"
+  class="product border border-gray hover:border-main p-4 rounded-xl hover:shadow-xl transition-all mb-4 group hover:-translate-y-3"
 >
   <a [routerLink]="[itemName, item._id]">
-    <div>
-      <img [src]="item.image" class="h-[400px] w-full object-contain" alt="" />
-      <h2 class="text-main my-3 text-center text-2xl">
+    <div class="flex flex-col items-center">
+      <img
+        [src]="item.image"
+        class="h-[350px] w-full object-contain rounded-lg shadow-md transition-transform duration-300 hover:scale-95"
+        alt="{{ item.name }}"
+      />
+      <h2 class="text-main my-3 text-center text-2xl font-semibold">
         {{ item.name }}
       </h2>
-    </div></a
-  >
+    </div>
+  </a>
 </div>

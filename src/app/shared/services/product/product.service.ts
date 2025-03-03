@@ -11,14 +11,6 @@ export class ProductService {
   _baseUrl = inject(API_BASE_URL);
 
   constructor() {}
-
-  // getProducts(categoryId?: string ,brand?:string): Observable<any> {
-  //   let url = categoryId
-  //     ? `${this._baseUrl}/products?category[in]=${categoryId}`
-  //     : `${this._baseUrl}/products`;
-  //   return this._httpClient.get(url);
-  // }
-
   getProducts(categoryId?: string, brandId?: string): Observable<any> {
     let url = `${this._baseUrl}/products`;
     if (categoryId) {

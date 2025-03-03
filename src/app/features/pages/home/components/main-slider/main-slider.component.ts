@@ -10,17 +10,21 @@ import { CarouselModule, OwlOptions } from 'ngx-owl-carousel-o';
 export class MainSliderComponent {
   customOptions: OwlOptions = {
     loop: true,
+    // autoplay: true,
+    // autoplayTimeout: 3000,
+    // autoplaySpeed: 1000,
+    // autoplayHoverPause: true,
     mouseDrag: true,
     touchDrag: false,
     pullDrag: false,
-    dots: false,
+    dots: true,
     navSpeed: 700,
-    navText: ['prev', 'next'],
+    navText: ['', ''],
     responsive: {
       0: {
         items: 1,
       },
     },
-    nav: true,
+    nav: false,
   };
 }

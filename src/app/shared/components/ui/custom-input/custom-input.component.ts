@@ -26,7 +26,6 @@ export class CustomInputComponent implements ControlValueAccessor {
 
   value: string = '';
   // control: any;
-
   // constructor(@Self() public ngControl: NgControl) {
   //   this.ngControl.valueAccessor = this;
   // }
