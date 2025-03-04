@@ -41,7 +41,7 @@ export class WishlistComponent implements OnInit {
       next: (res) => {
         console.log(res);
         this.removeItem(id);
-        this._cartService.numOfCartItems.next(res.numOfCartItems);
+        this._cartService.numOfCartItems.set(res.numOfCartItems);
       },
     });
   }

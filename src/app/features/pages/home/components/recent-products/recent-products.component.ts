@@ -48,7 +48,7 @@ export class RecentProductsComponent implements OnInit {
       next: (res) => {
         this.removeItemFromWishList(id);
         this._toastrService.success(res.message, 'Fresh Cart ');
-        this._cartService.numOfCartItems.next(res.numOfCartItems);
+        this._cartService.numOfCartItems.set(res.numOfCartItems);
       },
       error: (err) => {
         console.log(err);

@@ -65,7 +65,7 @@ export class LoginComponent implements OnInit {
             this._router.navigate(['/home']);
             this._cartService.getLoggedUserCart().subscribe({
               next: (res) => {
-                this._cartService.numOfCartItems.next(res.numOfCartItems);
+                this._cartService.numOfCartItems.set(res.numOfCartItems);
               },
             });
           },

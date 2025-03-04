@@ -1,10 +1,12 @@
 import {
   afterNextRender,
   Component,
+  computed,
   Inject,
   inject,
   OnInit,
   PLATFORM_ID,
+  Signal,
 } from '@angular/core';
 import { RouterLink, RouterLinkActive } from '@angular/router';
 import { AuthService } from '../../services/auth/auth.service';
@@ -22,7 +24,9 @@ export class NavbarComponent implements OnInit {
   _cartService = inject(CartService);
   _PLATFORM_ID = inject(PLATFORM_ID);
   isLoggedIn!: any;
-  countOfCartItems!: number;
+  countOfCartItems: Signal<number> = computed(() =>
+    this._cartService.numOfCartItems()
+  );
   constructor(@Inject(PLATFORM_ID) private platformId: any) {}
   loadFlowbite(callback: (flowbite: any) => void) {
     if (isPlatformBrowser(this.platformId)) {
@@ -43,17 +47,11 @@ export class NavbarComponent implements OnInit {
       if (localStorage.getItem('userToken')) {
         this._cartService.getLoggedUserCart().subscribe({
           next: (res) => {
-            this._cartService.numOfCartItems.next(res.numOfCartItems);
+            this._cartService.numOfCartItems.set(res.numOfCartItems);
           },
         });
       }
     }
-
-    this._cartService.numOfCartItems.subscribe({
-      next: (value) => {
-        this.countOfCartItems = value;
-      },
-    });
   }
 
   checkLoggedInStatus() {

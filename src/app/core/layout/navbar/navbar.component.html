@@ -152,10 +152,10 @@
             <i
               class="fa-solid fa-cart-shopping text-main hover:text-main-dark transition-colors"
             ></i>
-            @if (countOfCartItems > 0) {
+            @if (countOfCartItems() > 0) {
             <span
               class="bg-green-300 text-black text-xs font-medium px-2.5 py-0.5 rounded-full absolute -top-2 -right-4"
-              >{{ countOfCartItems }}</span
+              >{{ countOfCartItems() }}</span
             >
             }
           </a>

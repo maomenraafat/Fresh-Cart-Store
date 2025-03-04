@@ -59,7 +59,7 @@ export class CheckoutComponent implements OnInit {
               'Thank you for shopping with us!',
               'Fresh Cart '
             );
-            this._cartService.numOfCartItems.next(0);
+            this._cartService.numOfCartItems.set(0);
             this._router.navigate(['/allorders']);
           },
           error: (err) => {
@@ -83,7 +83,7 @@ export class CheckoutComponent implements OnInit {
             if (res.status === 'success') {
               open(res.session.url, '_self');
             }
-            this._cartService.numOfCartItems.next(0);
+            this._cartService.numOfCartItems.set(0);
           },
           error: (err) => {
             console.log(err);

@@ -23,11 +23,10 @@ export class OrdersComponent implements OnInit {
   cartItems!: CartItem[];
   _orderService = inject(OrderService);
   _authService = inject(AuthService);
- 
 
   // Pagination properties
   currentPage: number = 1;
-  itemsPerPage: number = 5; 
+  itemsPerPage: number = 5;
   totalPages: number = 0;
   paginatedOrders: Order[] = [];
   ngOnInit(): void {
@@ -56,38 +55,32 @@ export class OrdersComponent implements OnInit {
     this.paginateOrders();
   }
 
- 
   paginateOrders() {
     const startIndex = (this.currentPage - 1) * this.itemsPerPage;
     const endIndex = startIndex + this.itemsPerPage;
     this.paginatedOrders = this.ordersList.slice(startIndex, endIndex);
   }
 
-
   changePage(page: number) {
-    if (page < 1 || page > this.totalPages) return; 
+    if (page < 1 || page > this.totalPages) return;
     this.currentPage = page;
     this.paginateOrders();
   }
-
 
   openModal(order: Order) {
     this.selectedOrder = order;
     this.showModal();
   }
 
-
   closeModal() {
     this.selectedOrder = {} as Order;
     this.hideModal();
   }
 
-
   private showModal() {
     const modal = this.defaultModal.nativeElement;
     modal.classList.remove('hidden');
   }
-
 
   private hideModal() {
     const modal = this.defaultModal.nativeElement;
