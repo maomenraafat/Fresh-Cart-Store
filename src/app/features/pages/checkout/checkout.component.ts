@@ -60,7 +60,7 @@ export class CheckoutComponent implements OnInit {
               'Fresh Cart '
             );
             this._cartService.numOfCartItems.next(0);
-            this._router.navigate(['/orders']);
+            this._router.navigate(['/allorders']);
           },
           error: (err) => {
             console.log(err);

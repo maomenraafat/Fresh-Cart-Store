@@ -130,7 +130,7 @@ export const routes: Routes = [
       ),
   },
   {
-    path: 'orders',
+    path: 'allorders',
     canActivate: [authGuard],
     loadComponent: () =>
       import('./features/pages/orders/orders.component').then(
