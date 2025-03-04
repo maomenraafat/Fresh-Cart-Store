@@ -29,15 +29,7 @@
         >User Email :</label
       >
     </app-custom-input>
-    <!-- <input
-      type="email"
-      formControlName="email"
-      name="floating_email"
-      id="floating_email"
-      class="input-style peer"
-      placeholder=" "
-      required
-    /> -->
+
 
     <app-error-message [inputControl]="emailControl"></app-error-message>
   </div>
@@ -55,20 +47,7 @@
       >
     </app-custom-input>
 
-    <!-- <input
-      [type]="!toggleInput ? 'password' : 'text'"
-      formControlName="password"
-      name="floating_password"
-      id="floating_password"
-      class="input-style peer"
-      placeholder=" "
-      required
-    /> -->
-    <!-- <label
-      for="floating_password"
-      class="label label-style peer-focus:font-medium peer-focus:start-0 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto peer-focus:text-main peer-focus:dark:text-main peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6"
-      >Password :</label
-    > -->
+
     <span class="absolute top-[10%] right-0" (click)="togglePassword()">
       @if (!toggleInput) { <i class="fa fa-eye"></i>} @else {<i
         class="fa fa-eye-slash"
