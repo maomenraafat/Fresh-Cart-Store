@@ -1,14 +1,47 @@
-<section class="order p-8">
-  <div class="order__header my-7">
-    <div class="flex items-center justify-between mb-7">
-      <h1 class="capitalize text-main font-bold text-4xl">Orders</h1>
+<section class="order p-4">
+  <div class="order__header my-4">
+    <div class="flex items-center justify-between mb-4">
+      <h1 class="capitalize text-main font-bold text-2xl">Orders</h1>
     </div>
   </div>
   <div
-    class="order__body relative overflow-x-auto shadow-md sm:rounded-lg my-7"
+    class="order__body relative overflow-x-auto shadow-md sm:rounded-lg my-4"
   >
+    <!-- Responsive Table -->
+    <div class="block md:hidden">
+      @for (order of paginatedOrders; track $index) {
+      <div
+        class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 border-gray-200 hover:bg-gray-50 dark:hover:bg-gray-600 p-4"
+      >
+        <div class="flex items-center justify-between">
+          <img
+            src="images/freshcart-logo.svg"
+            class="w-16 max-w-full max-h-full"
+            alt="Apple Watch"
+          />
+          <div class="text-right">
+            <p class="font-semibold text-gray-900">
+              <span class="me-1">$</span>{{ order.totalOrderPrice }}
+            </p>
+            <p class="font-semibold text-gray-900">
+              {{ order.paymentMethodType }}
+            </p>
+          </div>
+        </div>
+        <div class="mt-4">
+          <button
+            (click)="openModal(order)"
+            class="font-medium text-main w-full py-2 border transition-all border-main rounded-lg hover:bg-main hover:text-white"
+          >
+            Show Details
+          </button>
+        </div>
+      </div>
+      }
+    </div>
+    <!-- Desktop Table -->
     <table
-      class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400"
+      class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400 hidden md:table"
     >
       <thead
         class="text-xs text-gray-700 capitalize text-main bg-gray-50 dark:bg-gray-700 dark:text-gray-400"
@@ -35,13 +68,12 @@
             />
           </td>
           <td class="px-6 py-4 font-semibold text-gray-900">
-            <p><span class="me-1">EGP</span>{{ order.totalOrderPrice }}</p>
+            <p><span class="me-1">$</span>{{ order.totalOrderPrice }}</p>
           </td>
           <td class="px-6 py-4 font-semibold text-gray-900">
             <p>{{ order.paymentMethodType }}</p>
           </td>
           <td class="px-6 py-4">
-            <!-- Button to trigger modal -->
             <button (click)="openModal(order)" class="font-medium text-main">
               Show Details
             </button>
@@ -51,6 +83,7 @@
       </tbody>
     </table>
   </div>
+  <!-- Pagination -->
   <nav aria-label="Page navigation example">
     <ul class="inline-flex -space-x-px text-sm">
       <li>
@@ -90,7 +123,7 @@
   aria-hidden="true"
   class="hidden bg-[rgba(0,0,0,0.6)] overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 flex justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full"
 >
-  <div class="relative p-4 w-full max-w-[80%] max-h-full">
+  <div class="relative p-4 w-full max-w-[90%] md:max-w-[80%] max-h-full">
     <!-- Modal content -->
     <div class="relative bg-white rounded-lg shadow-sm">
       <!-- Modal header -->
@@ -124,70 +157,25 @@
       </div>
       <!-- Modal body -->
       <div class="p-4 md:p-5 space-y-4">
-        <!-- <table
-          class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400"
-        >
-          <thead
-            class="text-xs text-gray-700 capitalize text-main bg-gray-50 dark:bg-gray-700 dark:text-gray-400"
-          >
-            <tr>
-              <th scope="col" class="px-16 py-3">
-                <span class="sr-only bg-black">Image</span>
-              </th>
-              <th scope="col" class="px-6 py-3">Title</th>
-              <th scope="col" class="px-6 py-3">Price</th>
-              <th scope="col" class="px-6 py-3">count</th>
-            </tr>
-          </thead>
-          <tbody>
-            @for (item of selectedOrder?.cartItems; track $index) {
-            <tr
-              class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 border-gray-200 hover:bg-gray-50 dark:hover:bg-gray-600"
-            >
-              <td class="p-4">
-                <img
-                  [src]="item.product.imageCover"
-                  class="w-16 md:w-32 max-w-full max-h-full"
-                  alt="Product Image"
-                />
-              </td>
-              <td class="px-6 py-4 font-semibold text-gray-900">
-                {{ item.product.title }}
-              </td>
-              <td class="px-6 py-4">
-                <div class="flex items-center">
-                  <div>{{ item.price }}</div>
-                </div>
-              </td>
-
-              <td class="px-6 py-4 font-semibold text-gray-900">
-                {{ item.count }}
-              </td>
-            </tr>
-            }
-          </tbody>
-        </table> -->
         <h2 class="text-2xl">Products :</h2>
-        <div class="flex flex-wrap gap-7">
+        <div class="flex flex-wrap gap-4">
           @for (item of selectedOrder?.cartItems; track $index) {
           <div
-            class="flex flex-wrap justify-center items-center w-[calc(25%-1.75rem)] border-b-2 border-gray p-4"
+            class="w-full md:w-[calc(50%-1rem)] lg:w-[calc(33.33%-1rem)] xl:w-[calc(25%-1rem)] border-b-2 border-gray p-4"
           >
-            <div>
+            <div class="flex flex-col items-center">
               <img
                 [src]="item.product.imageCover"
                 class="w-16 md:w-32 max-w-full max-h-full"
                 alt="Product Image"
               />
-            </div>
-            <div>
-              <span>
+              <span class="text-center mt-2">
                 {{ item.product.title.split(" ").splice(0, 3).join(" ") }}
               </span>
-              <div class="flex justify-center items-center gap-x-5">
+              <div class="flex justify-center items-center gap-x-5 mt-2">
                 <p>{{ item.count }}</p>
                 <span class="text-xl">x</span>
-                <p><span class="me-1">EGP</span>{{ item.price }}</p>
+                <p><span class="me-1">$</span>{{ item.price }}</p>
               </div>
             </div>
           </div>

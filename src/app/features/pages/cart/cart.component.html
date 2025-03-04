@@ -28,7 +28,55 @@
   <div
     class="cart__body relative overflow-x-auto shadow-md sm:rounded-lg my-7 bg-white p-5"
   >
-    <table class="w-full text-sm text-left rtl:text-right text-gray-700">
+    <div class="block md:hidden">
+      @for (product of cartDetails?.data?.products; track $index) {
+      <div
+        class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 border-gray-200 hover:bg-gray-50 dark:hover:bg-gray-600 p-4"
+      >
+        <div class="flex flex-col items-center">
+          <img
+            [src]="product.product.imageCover"
+            class="w-32 max-w-full max-h-full"
+            alt="{{ product.product.title }}"
+          />
+          <div class="flex items-center gap-x-3 ms-4">
+            <button
+              (click)="UpdateCart(product.product._id, product.count - 1)"
+              class="h-5 w-5 md:h-8 md:w-8 flex items-center justify-center border border-gray-300 rounded-full bg-white hover:bg-gray-200 transition"
+            >
+              <i class="fa fa-minus text-gray-600"></i>
+            </button>
+            <span class="font-medium text-lg">{{ product.count }}</span>
+            <button
+              (click)="UpdateCart(product.product._id, product.count + 1)"
+              class="h-5 w-5 md:h-8 md:w-8 flex items-center justify-center border border-gray-300 rounded-full bg-white hover:bg-gray-200 transition"
+            >
+              <i class="fa fa-plus text-gray-600"></i>
+            </button>
+          </div>
+          <div class="text-right">
+            <p class="font-semibold text-main">
+              <span class="me-1 text-main">$</span>{{ product.price }}
+            </p>
+            <p class="font-semibold text-sm text-gray-900">
+              {{ product.product.title.split(" ").splice(0, 3).join(" ") }}
+            </p>
+          </div>
+        </div>
+        <div class="mt-4">
+          <button
+            (click)="removeItemFromCart(product.product._id)"
+            class="text-red-600 font-medium transition w-full py-2 border border-red-600 rounded-lg hover:bg-red-600 hover:text-white"
+          >
+            <i class="fa fa-trash"></i> Remove
+          </button>
+        </div>
+      </div>
+      }
+    </div>
+    <table
+      class="w-full text-sm text-left rtl:text-right text-gray-700 hidden md:table"
+    >
       <thead class="text-xs text-gray-700 uppercase bg-gray-100">
         <tr>
           <th scope="col" class="px-6 py-3">
