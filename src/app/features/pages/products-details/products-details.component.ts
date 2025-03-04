@@ -1,8 +1,4 @@
-import {
-  Component,
-  inject,
-  OnInit,
-} from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { ProductService } from '../../../shared/services/product/product.service';
 import { Product } from '../../../shared/interfaces/product';
@@ -105,6 +101,7 @@ export class ProductsDetailsComponent implements OnInit {
         console.log(res);
         this.isLoading = false;
         this._toastrService.success(res.message, 'FreshCart!');
+        this._cartService.numOfCartItems.set(res.numOfCartItems);
       },
       error: (err) => {
         console.log(err);
@@ -139,7 +136,6 @@ export class ProductsDetailsComponent implements OnInit {
       },
     });
   }
-
 
   get() {
     if (!this.wishList) return;
